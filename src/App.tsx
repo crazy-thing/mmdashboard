@@ -3,11 +3,12 @@ import './App.scss'
 import { add } from './assets/exports'
 import Modpack from './components/Modpack';
 import { ModpackType } from './types/Modpack';
-import { createTemplateModpack, getAllModpacks } from './util/api';
+import { createTemplateModpack, getAllModpacks, uploadFile } from './util/api';
 import { authenticateApiKey } from './util/auth';
 import ApiAuth from './components/ApiAuth';
 import ModpackEditor from './components/ModpackEditor';
 import Versions from './components/Versions';
+import ScreenshotViewer from './components/ScreenshotViewer';
 
 function App() {
   const [authenticated, setAuthenticated] = useState<any>(false);
@@ -16,6 +17,7 @@ function App() {
   const [selectedModpack, setSelectedModpack] = useState<ModpackType>({});
   const [showCreateModpack, setShowCreateModpack] = useState<boolean>(false);
   const [showVersions, setShowVersions] = useState<boolean>(false);
+  const [showScreenshotViewer, setShowScreenshotViewer] = useState<boolean>(false);
 
 
     const createModpackTemp = async () => {
@@ -47,6 +49,19 @@ function App() {
       } else {
         setAuthenticated(false);
       }
+    };
+
+    const handleScreenshotUpload = async (event: any) => {
+      const file = event.target.files?.[0]
+      console.log("File", file);
+      if (file) {
+        await uploadFile(
+            file,
+            `${import.meta.env.VITE_IP}`,
+            localStorage.getItem('apiKey') as string,
+            'screenshotFile'
+        )
+      }      
     };
 
     const fetchModpacks = async () => {
@@ -95,6 +110,11 @@ function App() {
           {showVersions && (
             <Versions versions={selectedModpack.versions || []} modpack={selectedModpack} setShowVersions={setShowVersions} setSelectedModpack={setSelectedModpack}/>
           )}
+
+          {showScreenshotViewer && (
+            <ScreenshotViewer onClose={() => setShowScreenshotViewer(false)} />
+          )}
+
         <div className='app__topbar'>
           <div className='app__topbar-create' onClick={createModpackTemp}>
             <img className='app__topbar-create-icon' src={add} />
@@ -102,6 +122,11 @@ function App() {
           </div>
 
           <p className='app__topbar-header'>CHOOSE A MODPACK:</p>
+
+          <div className='app__topbar__screenshot'>
+            <span className='app__topbar__screenshot-add' onClick={() => document.getElementById("screenshot-upload")?.click()} > Add Screenshot</span>
+            <span className='app_topbar__screenshot-view' onClick={() => setShowScreenshotViewer(true)} > View Screenshots</span>
+          </div>
         </div>
 
         <div className='app__modpacks'>
@@ -112,11 +137,19 @@ function App() {
           )}
         </div>
 
-        <p className='app-version'>MML Web API v3.0.0</p>
+        <p className='app-version'>MMApi v3.0.2</p>
       </div>
       ) : (
         <ApiAuth setAuthenticated={setAuthenticated} />
       )}
+
+      <input
+        type="file"
+        id='screenshot-upload'
+        accept="image/*"
+        onChange={handleScreenshotUpload}
+        style={{ display: 'none' }}
+      />
     </>
 
   )

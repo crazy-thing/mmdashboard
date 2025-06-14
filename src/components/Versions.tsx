@@ -16,7 +16,6 @@ interface VersionsProps {
 const Versions = ({modpack, setShowVersions, setSelectedModpack }: VersionsProps) => {
 
     const [selectedVersion, setSelectedVersion] = React.useState<VersionType | null>(null);
-    const [, setProgress] = React.useState<number>(0);
     const [, setVers] = React.useState<VersionType[]>([]);
     const [showVersionEditor, setShowVersionEditor] = React.useState<boolean>(false);
 

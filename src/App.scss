@@ -52,7 +52,31 @@ html, body, p {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
+
+
+
+.app__topbar__screenshot {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4vh;
+}
+
+.app__topbar__screenshot-add, .app_topbar__screenshot-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.37vh solid #fff;
+    border-radius: 1.1vh;
+    font-size: 2vh;
+    width: 16.7vh;
+    height: 6vh;
+    cursor: pointer;
+}
+
 
 .app__topbar-header {
     position: absolute;
@@ -60,6 +84,7 @@ html, body, p {
     transform: translateX(-50%);
     font-size: 7vh;
 }
+
 
 .app__topbar-create {
     display: flex;

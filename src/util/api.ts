@@ -158,3 +158,30 @@ export const editModpack = async (
     throw error;
   }
 };
+
+export const deleteScreenshot = async (
+  filename: string,
+  apiUrl: string,
+  apiKey: string
+) => {
+    try {
+    const res = await fetch(`${apiUrl}/screenshots/${filename}`, {
+      method: 'DELETE',
+      headers: {
+        'x-api-key': apiKey || ''
+      }
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error(`Failed to delete screenshot: ${errorData.message}`);
+      return false;
+    }
+
+    console.log('Screenshot deleted:', filename);
+    return true;
+  } catch (err) {
+    console.error('Error deleting screenshot:', err);
+    return false;
+  }
+}
