@@ -41,40 +41,49 @@ html, body, p {
 }
 
 .app {
-    padding: 0 9.5vh;
-    margin-top: 7.4vh;
     background: var(--bg);
 }
 
 .app__topbar {
     position: relative;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 3vh;
+    width: 100%;
+    height: 14vh;
+    background:#373737;
+
+    border-bottom: #686868 0.55vh solid;
 }
 
 
 
-.app__topbar__screenshot {
+.app__topbar__buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1.4vh;
+    gap: 4vh;
+    position: absolute;
+    right: 4.5vh;
 }
 
-.app__topbar__screenshot-add, .app_topbar__screenshot-view {
+.app__topbar__username, .app__topbar__screenshot-view {
     display: flex;
     justify-content: center;
     align-items: center;
     border: 0.37vh solid #fff;
     border-radius: 1.1vh;
     font-size: 2vh;
-    width: 16.7vh;
+    width: 20vh;
     height: 6vh;
     cursor: pointer;
+}
+
+.app__topbar__screenshot-view {
+    width: 25vh;
 }
 
 
@@ -86,7 +95,11 @@ html, body, p {
 }
 
 
-.app__topbar-create {
+.app__create {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,18 +109,23 @@ html, body, p {
     border: 0.37vh solid #fff;
     border-radius: 1.1vh;
     font-size: 2vh;
+    z-index: 10;
     cursor: pointer;
 }
 
-.app__topbar-create-icon {
+.app__create__icon {
     width: 3.8vh;
     height: 3.8vh;
 }
 
 .app__modpacks {
     margin-top: 5vh;
-    width: 100%;
+    width: 92%;
+    padding: 0 4%;
     display: flex;
+    height: 58vh;
+    max-height: 58vh;
+    overflow-y: auto;
     flex-direction: column;
 }
 

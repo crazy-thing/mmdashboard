@@ -1,0 +1,76 @@
+.username {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #1a1a1a;
+    z-index: 1000;
+}
+
+.username__top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vh;
+    width: 100%;
+    height: 14vh;
+    background:#373737;
+
+    border-bottom: #686868 0.55vh solid;
+}
+
+.username__top-button {
+    width: 26vh;
+    height: 5.4vh;
+    background: #252525;
+    border-radius: 2.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.7vh;
+    cursor: pointer;
+}
+
+.username__top-button.blue {
+    background: #3aa3d0;
+}
+
+.username__list {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 23vw;
+    height: 50vh;
+    border: .5vh solid #aaaaaa;
+}
+
+.username__item {
+    width: 90%;
+    padding: 0 5%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #252525;
+    cursor: pointer;
+}
+
+.username__item__text {
+    font-size: 2.5vh;
+    color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.username__item__delete {
+    width: 2.5vh;
+    height: 2.5vh;
+    margin-left: 1vh;
+    cursor: pointer;
+}

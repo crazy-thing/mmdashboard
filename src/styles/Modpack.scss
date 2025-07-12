@@ -1,15 +1,12 @@
 .modpack {
     width: 38vh;
-    height: 38vh;
+    height: 25vh;
     transition: box-shadow .04s ease-in;
     box-shadow: 0 0 0 transparent;
 
     border-radius: 2.5vh 2.5vh 0 0;
 }
 
-.modpack:hover {
-    box-shadow: 0 0 0 2px #ffffff;
-}
 
 .modpack__top {
     position: relative;
@@ -67,7 +64,7 @@
 
 .modpack__bottom {
     width: 100%;
-    height: 22%;
+    height: 30%;
     background: #585758;
     gap: 4vh;
     display: flex;
@@ -81,7 +78,7 @@
     align-items: center;
     font-size: 2.5vh;
     width: 15vh;
-    height: 5vh;
+    height: 6vh;
     border-radius: 2.5vh;
     background: #3aa3d0;
     cursor: pointer;

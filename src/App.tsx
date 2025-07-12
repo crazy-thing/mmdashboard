@@ -9,6 +9,8 @@ import ApiAuth from './components/ApiAuth';
 import ModpackEditor from './components/ModpackEditor';
 import Versions from './components/Versions';
 import ScreenshotViewer from './components/ScreenshotViewer';
+import WebsiteScreenshots from './components/WebsiteScreenshots';
+import Username from './components/Username';
 
 function App() {
   const [authenticated, setAuthenticated] = useState<any>(false);
@@ -17,7 +19,8 @@ function App() {
   const [selectedModpack, setSelectedModpack] = useState<ModpackType>({});
   const [showCreateModpack, setShowCreateModpack] = useState<boolean>(false);
   const [showVersions, setShowVersions] = useState<boolean>(false);
-  const [showScreenshotViewer, setShowScreenshotViewer] = useState<boolean>(false);
+  const [showWebsiteScreenshots, setShowWebsiteScreenshots] = useState<boolean>(false);
+  const [showUsername, setShowUsername] = useState<boolean>(false);
 
 
     const createModpackTemp = async () => {
@@ -51,18 +54,7 @@ function App() {
       }
     };
 
-    const handleScreenshotUpload = async (event: any) => {
-      const file = event.target.files?.[0]
-      console.log("File", file);
-      if (file) {
-        await uploadFile(
-            file,
-            `${import.meta.env.VITE_IP}`,
-            localStorage.getItem('apiKey') as string,
-            'screenshotFile'
-        )
-      }      
-    };
+
 
     const fetchModpacks = async () => {
       const mps = await getAllModpacks(`${import.meta.env.VITE_IP}`);
@@ -111,21 +103,22 @@ function App() {
             <Versions versions={selectedModpack.versions || []} modpack={selectedModpack} setShowVersions={setShowVersions} setSelectedModpack={setSelectedModpack}/>
           )}
 
-          {showScreenshotViewer && (
-            <ScreenshotViewer onClose={() => setShowScreenshotViewer(false)} />
+          {showWebsiteScreenshots && (
+            <WebsiteScreenshots setShowWebsiteScreenshots={setShowWebsiteScreenshots} />
           )}
 
+          {showUsername && (
+            <Username setShowUsername={setShowUsername} />
+          )}
+          
+
         <div className='app__topbar'>
-          <div className='app__topbar-create' onClick={createModpackTemp}>
-            <img className='app__topbar-create-icon' src={add} />
-            <p className='app__topbar-create-text'>Create New Modpack</p>
-          </div>
 
           <p className='app__topbar-header'>CHOOSE A MODPACK:</p>
 
-          <div className='app__topbar__screenshot'>
-            <span className='app__topbar__screenshot-add' onClick={() => document.getElementById("screenshot-upload")?.click()} > Add Screenshot</span>
-            <span className='app_topbar__screenshot-view' onClick={() => setShowScreenshotViewer(true)} > View Screenshots</span>
+          <div className='app__topbar__buttons'>
+            <span className='app__topbar__screenshot-view' onClick={() => setShowWebsiteScreenshots(true)} > Website Screenshots</span>
+            <span className='app__topbar__username' onClick={() => setShowUsername(true)} > DEV Access</span>
           </div>
         </div>
 
@@ -137,19 +130,19 @@ function App() {
           )}
         </div>
 
+        {!showWebsiteScreenshots && !showUsername && !showCreateModpack && !showVersions && (
+          <div className='app__create' onClick={createModpackTemp}>
+              <img className='app__create__icon' src={add} />
+              <p className='app__create__text'>Create New Modpack</p>
+          </div>
+        )}
+
         <p className='app-version'>MMApi v3.0.2</p>
       </div>
       ) : (
         <ApiAuth setAuthenticated={setAuthenticated} />
       )}
 
-      <input
-        type="file"
-        id='screenshot-upload'
-        accept="image/*"
-        onChange={handleScreenshotUpload}
-        style={{ display: 'none' }}
-      />
     </>
 
   )

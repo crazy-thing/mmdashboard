@@ -1,4 +1,4 @@
-import { deleteIcon } from '../assets/exports'
+import { deleteIcon, trash2 } from '../assets/exports'
 import { ModpackType } from '../types/Modpack'
 import '../styles/Modpack.scss'
 import { deleteModpack } from '../util/api'
@@ -26,7 +26,7 @@ const Modpack = ({ modpack, fetchModpacks, editModpack, editVersions }: ModpackP
     <div className='modpack'>
         <div className='modpack__top'>
           <span className={`modpack__top-status ${modpack && modpack.status == "dev" ? "dev" : modpack && modpack.status == "released" ? "released" : "unreleased"}`}> {modpack && modpack.status == "dev" ? "Dev Build" : modpack && modpack.status == "released" ? "Released" : "Un-Released"} </span>
-          <img className='modpack__top-delete' src={deleteIcon} onClick={handleDelete} />    
+          <img className='modpack__top-delete' src={trash2} onClick={handleDelete} />    
           <img className='modpack__top-thumbnail' src={`${import.meta.env.VITE_UPLOADS}/thumbnails/${modpack && modpack.thumbnail}`} />
         </div>
         <div className='modpack__bottom'>
